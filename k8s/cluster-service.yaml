@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cupidcooks-service
+  labels:
+    app: cupidcooks
+spec:
+  selector:
+    app: cupidcooks
+  ports:
+  - name: http
+    port: 80
+    targetPort: 4321
+  type: ClusterIP
