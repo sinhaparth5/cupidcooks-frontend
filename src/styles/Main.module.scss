@@ -1,0 +1,15 @@
+@use "./variables.scss" as *;
+
+.container {
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: $primary-color;
+
+    .title {
+        color: azure;
+        font-family: $font-family-primary;
+        font-size: $font-size-base;
+        font-weight: 500;
+    }
+}
