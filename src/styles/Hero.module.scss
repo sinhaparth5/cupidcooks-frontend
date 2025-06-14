@@ -199,6 +199,10 @@
     color: v.$text-color-secondary;
     max-width: 600px;
     font-family: v.$font-family-secondary;
+
+    span {
+      font-weight: bold;
+    }
     
     @media (max-width: v.$breakpoint-lg) {
       align-self: center;
@@ -497,6 +501,7 @@
     font-weight: v.$font-weight-semibold;
     border-radius: v.$border-radius;
     animation: pulse-badge 2s ease-in-out infinite;
+    font-family: v.$font-family-primary;
   }
 
   // Restaurant list
@@ -578,6 +583,7 @@
     font-weight: v.$font-weight-medium;
     border-radius: v.$border-radius-small;
     flex-shrink: 0;
+    font-family: v.$font-family-primary;
     
     // Green for "Open" - using glass-green
     &[data-status="open"] {
