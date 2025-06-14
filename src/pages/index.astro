@@ -1,12 +1,13 @@
 ---
 import styles from "../styles/Main.module.scss";
 import BaseLayout from "../layout/BaseLayout.astro";
+import Hero from "components/Hero.astro";
 
 const pageTitle = "Home";
 const pageDescription = "Explore our cutting edge website";
 ---
 <BaseLayout title={pageTitle} description={pageDescription} canonicalUrl="http://localhost:4321">
 	<div class={styles.container}>
-		<div class={styles.title}>Parth</div>
+		<Hero />
 	</div>
 </BaseLayout>
