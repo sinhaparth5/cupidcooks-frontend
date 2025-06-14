@@ -1,15 +1,26 @@
 @use "./variables.scss" as *;
 
 .container {
-    max-width: 1120px;
     width: 100%;
+    max-width: 100%;
+    padding-left: $spacing-medium;
+    padding-right: $spacing-medium;
     margin: 0 auto;
-    background-color: $primary-color;
+    box-sizing: border-box;
 
-    .title {
-        color: azure;
-        font-family: $font-family-primary;
-        font-size: $font-size-base;
-        font-weight: 500;
+    @media (min-width: $breakpoint-sm) {
+        max-width: $breakpoint-sm;
+    }
+
+    @media (min-width: $breakpoint-md) {
+        max-width: $breakpoint-md;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      max-width: $breakpoint-lg;
+    }
+
+    @media (min-width: $breakpoint-xl) {
+      max-width: $breakpoint-xl;
     }
 }

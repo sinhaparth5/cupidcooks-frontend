@@ -1,0 +1,338 @@
+// src/styles/navbar.module.scss
+@use "./variables.scss" as v;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: transparent;
+  padding: v.$spacing-medium 0;
+  transition: all v.$transition-normal;
+
+  // Apple-style liquid glass effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      v.$glass-cadillac-50 0%,
+      v.$glass-cadillac-100 50%,
+      v.$glass-cadillac-200 100%
+    );
+    backdrop-filter: blur(v.$glass-blur) saturate(180%);
+    -webkit-backdrop-filter: blur(v.$glass-blur) saturate(180%);
+    border-bottom: v.$glass-border-subtle;
+    box-shadow: v.$glass-shadow;
+    z-index: -1;
+    
+    // Enhanced glass effect with multiple layers
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        v.$glass-white-soft 20%,
+        v.$glass-white-soft 80%,
+        transparent 100%
+      );
+    }
+  }
+
+  // Scroll effect - becomes more opaque when scrolling
+  &.scrolled::before {
+    background: linear-gradient(
+      135deg,
+      v.$glass-cadillac-100 0%,
+      v.$glass-cadillac-200 50%,
+      v.$glass-cadillac-300 100%
+    );
+    backdrop-filter: blur(v.$glass-blur-heavy) saturate(200%);
+    -webkit-backdrop-filter: blur(v.$glass-blur-heavy) saturate(200%);
+    box-shadow: v.$glass-shadow-strong;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: auto; // Ensure nav has defined height
+    min-height: 60px; // Minimum height for consistent spacing
+  }
+
+  &__logo {
+    z-index: 2;
+    
+    a {
+      display: inline-block;
+      padding: v.$spacing-small;
+      border-radius: v.$border-radius;
+      transition: all v.$transition-bounce;
+
+      h1 {
+        text-decoration: none;
+      }
+      
+      img {
+        transition: all v.$transition-normal;
+        filter: drop-shadow(0 2px 8px v.$glass-cadillac-minimal);
+        
+        &:hover {
+          transform: scale(1.05) rotate(2deg);
+          filter: drop-shadow(0 4px 16px v.$glass-cadillac-subtle);
+        }
+      }
+      
+      &:hover {
+        background: v.$glass-white-minimal;
+        backdrop-filter: blur(v.$glass-blur-light);
+        -webkit-backdrop-filter: blur(v.$glass-blur-light);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  &__toggle {
+    display: none; // Hidden by default on desktop
+    background: v.$glass-cadillac-minimal;
+    backdrop-filter: blur(v.$glass-blur-light);
+    -webkit-backdrop-filter: blur(v.$glass-blur-light);
+    border: v.$glass-border;
+    border-radius: v.$border-radius;
+    font-size: v.$font-size-large;
+    color: v.$text-color;
+    cursor: pointer;
+    padding: v.$spacing-small;
+    z-index: 2;
+    transition: all v.$transition-normal;
+    box-shadow: v.$glass-shadow-subtle;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: v.$glass-cadillac-subtle;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: v.$glass-shadow;
+      border: v.$glass-border-strong;
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.95);
+    }
+
+    @media (max-width: v.$breakpoint-md) {
+      display: flex; // Only show on mobile
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: v.$spacing-small;
+    list-style: none;
+    margin: 0;
+    padding: v.$spacing-small;
+    background: v.$glass-cadillac-minimal;
+    backdrop-filter: blur(v.$glass-blur-light);
+    -webkit-backdrop-filter: blur(v.$glass-blur-light);
+    border-radius: v.$border-radius-large;
+    border: v.$glass-border;
+    box-shadow: v.$glass-shadow-subtle;
+    position: relative;
+    
+    // Subtle inner glow
+    &::before {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      right: 1px;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        v.$glass-white-subtle 50%,
+        transparent 100%
+      );
+      border-radius: v.$border-radius-large v.$border-radius-large 0 0;
+    }
+
+    @media (max-width: v.$breakpoint-md) {
+      display: none; // Hidden by default on mobile
+      flex-direction: column;
+      width: 280px; // Fixed width for better control
+      background: linear-gradient(
+        135deg,
+        v.$glass-cadillac-100 0%,
+        v.$glass-cadillac-200 100%
+      );
+      backdrop-filter: blur(v.$glass-blur-heavy);
+      -webkit-backdrop-filter: blur(v.$glass-blur-heavy);
+      padding: v.$spacing-medium; // Reduced container padding
+      position: absolute;
+      top: calc(100% + v.$spacing-small);
+      left: 50%; // Center horizontally
+      transform: translateX(-50%); // Perfect centering
+      border-radius: v.$border-radius-xl;
+      box-shadow: v.$glass-shadow-strong;
+      border: v.$glass-border-strong;
+      gap: v.$spacing-xs; // Much smaller gap between items
+      z-index: 1001;
+
+      // Animation class for when menu opens
+      &.menu-open {
+        animation: slideDown 0.3s v.$transition-bounce;
+      }
+
+      li {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  &__link {
+    color: v.$text-color;
+    font-family: v.$font-family-primary;
+    font-size: v.$font-size-base;
+    font-weight: v.$font-weight-medium;
+    text-decoration: none;
+    padding: v.$spacing-small v.$spacing-medium;
+    border-radius: v.$border-radius;
+    position: relative;
+    transition: all v.$transition-normal;
+    background: transparent;
+    border: 1px solid transparent;
+    
+    // Subtle text shadow for better readability
+    text-shadow: 0 1px 2px v.$glass-black-minimal;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: v.$glass-cadillac-minimal;
+      border-radius: v.$border-radius;
+      opacity: 0;
+      transition: all v.$transition-fast;
+      z-index: -1;
+    }
+
+    &:hover {
+      color: v.$primary-color;
+      transform: translateY(-2px);
+      text-shadow: 0 2px 8px v.$glass-cadillac-subtle;
+      
+      &::before {
+        opacity: 1;
+        background: linear-gradient(
+          135deg,
+          v.$glass-cadillac-subtle 0%,
+          v.$glass-white-subtle 100%
+        );
+        backdrop-filter: blur(v.$glass-blur-light);
+        -webkit-backdrop-filter: blur(v.$glass-blur-light);
+        box-shadow: v.$glass-shadow-subtle;
+        border: v.$glass-border;
+      }
+    }
+
+    &.active {
+      color: v.$primary-color;
+      font-weight: v.$font-weight-semibold;
+      
+      &::before {
+        opacity: 1;
+        background: linear-gradient(
+          135deg,
+          v.$glass-cadillac-400 0%,
+          v.$glass-cadillac-300 100%
+        );
+        backdrop-filter: blur(v.$glass-blur-light);
+        -webkit-backdrop-filter: blur(v.$glass-blur-light);
+        box-shadow: inset 0 2px 4px v.$glass-cadillac-subtle, v.$glass-shadow-subtle;
+        border: v.$glass-border-strong;
+      }
+    }
+
+    @media (max-width: v.$breakpoint-md) {
+      padding: v.$spacing-small v.$spacing-medium; // Reduced vertical padding, keep horizontal
+      font-size: v.$font-size-base;
+      text-align: center;
+      margin: 0; // Remove vertical margins
+      border: none; // Remove any border
+      
+      &:hover {
+        transform: translateX(4px);
+      }
+    }
+  }
+
+  @media (max-width: v.$breakpoint-md) {
+    padding: v.$spacing-small 0;
+    
+    nav {
+      flex-wrap: nowrap;
+      padding: 0 v.$spacing-large; // Increased padding for button spacing
+    }
+
+    &__logo {
+      flex-shrink: 0;
+    }
+    
+    &__toggle {
+      margin-left: auto;
+      margin-right: v.$spacing-small; // Add right margin for breathing room
+    }
+  }
+}
+
+// Animation for mobile menu
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Enhanced hover effects for better interactivity
+.navbar__link {
+  &:focus-visible {
+    outline: 2px solid v.$primary-color;
+    outline-offset: 2px;
+  }
+}
+
+// Support for reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .navbar {
+    &::before,
+    &__logo a,
+    &__toggle,
+    &__link {
+      transition: none;
+    }
+    
+    &__links.visible {
+      animation: none;
+    }
+  }
+}
