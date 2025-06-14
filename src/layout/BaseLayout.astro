@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+}
+const { title, description = "Default description for your Astro website", canonicalUrl } = Astro.props;
+
+const pageTitle = `${title} | CupidCooks`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <!-- Canonical URL for SEO -->
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <!-- Open Graph Tags for Social Media -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl || Astro.url} />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <slot /> <!-- Renders the page content -->
+  </body>
+</html>
