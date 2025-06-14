@@ -44,4 +44,4 @@ EXPOSE 4321
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD curl --fail http://localhost:4321/health || exit 1
 
-CMD node ./dist/server/entry.mjs
+CMD ["node", "./dist/server/entry.mjs"]
