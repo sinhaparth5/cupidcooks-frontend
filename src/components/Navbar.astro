@@ -1,0 +1,188 @@
+---
+import styles from '../styles/Navbar.module.scss';
+import mainStyles from '../styles/Main.module.scss';
+import { Picture } from 'astro:assets';
+import Logo from '../assets/logo/image-removebg-preview.png';
+---
+
+<header class={styles.navbar} id="navbar">
+  <nav class={mainStyles.container}>
+    <div class={styles.navbar__logo}>
+      <a href="/" aria-label="Cupid Cooks Home">
+        <h1>CupidCooks</h1>
+      </a>
+    </div>
+    <button 
+      class={styles.navbar__toggle} 
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      type="button"
+    >
+      <span aria-hidden="true">☰</span>
+    </button>
+    <ul class={styles.navbar__links} role="navigation">
+      <li><a href="/" class={styles.navbar__link}>Home</a></li>
+      <li><a href="/about" class={styles.navbar__link}>About</a></li>
+      <li><a href="/services" class={styles.navbar__link}>Services</a></li>
+      <li><a href="/contact" class={styles.navbar__link}>Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script define:vars={{
+  navbarClass: styles.navbar,
+  toggleClass: styles.navbar__toggle,
+  linksClass: styles.navbar__links,
+  linkClass: styles.navbar__link,
+  activeClass: styles.active
+}}>
+  // Enhanced navbar functionality
+  class NavbarController {
+    constructor() {
+      this.navbar = document.querySelector(`.${CSS.escape(navbarClass)}`);
+      this.toggle = document.querySelector(`.${CSS.escape(toggleClass)}`);
+      this.linksContainer = document.querySelector(`.${CSS.escape(linksClass)}`);
+      this.links = document.querySelectorAll(`.${CSS.escape(linkClass)}`);
+      this.isMenuOpen = false;
+      this.scrollThreshold = 50;
+      
+      this.init();
+    }
+
+    init() {
+      this.setupMobileToggle();
+      this.setActiveLink();
+      this.setupScrollEffect();
+      this.setupKeyboardNavigation();
+      this.setupClickOutside();
+    }
+
+    setupMobileToggle() {
+      if (this.toggle && this.linksContainer) {
+        this.toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.toggleMenu();
+        });
+      }
+    }
+
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+      this.toggle.setAttribute('aria-expanded', this.isMenuOpen.toString());
+      
+      if (this.isMenuOpen) {
+        this.linksContainer.style.display = 'flex';
+        this.linksContainer.classList.add('menu-open');
+        // Trap focus when menu is open
+        this.trapFocus();
+      } else {
+        this.linksContainer.style.display = 'none';
+        this.linksContainer.classList.remove('menu-open');
+      }
+    }
+
+    closeMenu() {
+      if (this.isMenuOpen) {
+        this.isMenuOpen = false;
+        this.linksContainer.style.display = 'none';
+        this.linksContainer.classList.remove('menu-open');
+        this.toggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    setActiveLink() {
+      const currentPath = window.location.pathname;
+      
+      this.links.forEach(link => {
+        const linkPath = new URL(link.href).pathname;
+        
+        // Remove existing active class
+        link.classList.remove(activeClass);
+        
+        // Add active class to current page
+        if (linkPath === currentPath || 
+            (currentPath === '/' && linkPath === '/') ||
+            (currentPath !== '/' && linkPath !== '/' && currentPath.startsWith(linkPath))) {
+          link.classList.add(activeClass);
+        }
+      });
+    }
+
+    setupScrollEffect() {
+      let ticking = false;
+      
+      const updateNavbar = () => {
+        const scrollY = window.scrollY;
+        
+        if (scrollY > this.scrollThreshold) {
+          this.navbar.classList.add('scrolled');
+        } else {
+          this.navbar.classList.remove('scrolled');
+        }
+        
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (!ticking) {
+          requestAnimationFrame(updateNavbar);
+          ticking = true;
+        }
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    setupKeyboardNavigation() {
+      // Close menu on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isMenuOpen) {
+          this.closeMenu();
+          this.toggle.focus();
+        }
+      });
+
+      // Handle Enter and Space on toggle button
+      this.toggle?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.toggleMenu();
+        }
+      });
+    }
+
+    setupClickOutside() {
+      document.addEventListener('click', (e) => {
+        if (this.isMenuOpen && 
+            !this.navbar.contains(e.target) && 
+            !this.toggle.contains(e.target)) {
+          this.closeMenu();
+        }
+      });
+    }
+
+    trapFocus() {
+      const focusableElements = this.linksContainer.querySelectorAll(
+        'a, button, [tabindex]:not([tabindex="-1"])'
+      );
+      
+      if (focusableElements.length > 0) {
+        focusableElements[0].focus();
+      }
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new NavbarController();
+    });
+  } else {
+    new NavbarController();
+  }
+
+  // Handle page transitions (for SPAs)
+  document.addEventListener('astro:page-load', () => {
+    new NavbarController();
+  });
+</script>

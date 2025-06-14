@@ -1,0 +1,339 @@
+---
+import styles from '../styles/Hero.module.scss';
+import mainStyles from '../styles/Main.module.scss';
+import { Picture } from 'astro:assets';
+import HeroImage from '../assets/restaurant.jpeg';
+---
+
+<section class={styles.hero}>
+  <div class={mainStyles.container}>
+    <!-- Background Elements -->
+    <div class={styles.hero__background}>
+      <!-- Animated Blobs -->
+      <div class={styles.hero__blob} data-blob="1"></div>
+      <div class={styles.hero__blob} data-blob="2"></div>
+      <div class={styles.hero__blob} data-blob="3"></div>
+      
+      <!-- Floating Food Icons -->
+      <div class={styles.hero__floating}>
+        <div class={styles.hero__floatingItem} data-float="1">🍕</div>
+        <div class={styles.hero__floatingItem} data-float="2">🍔</div>
+        <div class={styles.hero__floatingItem} data-float="3">🍣</div>
+        <div class={styles.hero__floatingItem} data-float="4">🥗</div>
+        <div class={styles.hero__floatingItem} data-float="5">🍰</div>
+        <div class={styles.hero__floatingItem} data-float="6">🍜</div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class={styles.hero__content}>
+      <!-- Text Content -->
+      <div class={styles.hero__text}>
+        <!-- Badge -->
+        <div class={styles.hero__badge}>
+          <span class={styles.hero__badgeIcon}>💕</span>
+          <span>Find Your Perfect Match</span>
+        </div>
+        
+        <!-- Title -->
+        <h1 class={styles.hero__title}>
+          <span class={styles.hero__titleLine}>Discover Amazing</span>
+          <span class={styles.hero__titleLine}>
+            <span class={styles.hero__titleGradient}>Restaurants</span>
+          </span>
+          <span class={styles.hero__titleLine}>Near You</span>
+        </h1>
+        
+        <!-- Description -->
+        <p class={styles.hero__description}>
+          Let CupidCooks be your culinary matchmaker. Filter by cuisine, price, mood, and more 
+          to find the perfect restaurant for every occasion. From romantic dinners to casual bites, 
+          we'll help you fall in love with food again.
+        </p>
+        
+        <!-- Search Section -->
+        <div class={styles.hero__search}>
+          <div class={styles.hero__searchContainer}>
+            <!-- Location Input -->
+            <div class={styles.hero__searchInput}>
+              <span class={styles.hero__searchIcon}>📍</span>
+              <input 
+                type="text" 
+                placeholder="Enter your location..."
+                class={styles.hero__input}
+              />
+            </div>
+            
+            <!-- Filter Buttons -->
+            <div class={styles.hero__filters}>
+              <button class={styles.hero__filterBtn} data-filter="cuisine">
+                <span>🍽️</span>
+                <span>Cuisine</span>
+              </button>
+              <button class={styles.hero__filterBtn} data-filter="price">
+                <span>💰</span>
+                <span>Price</span>
+              </button>
+              <button class={styles.hero__filterBtn} data-filter="mood">
+                <span>✨</span>
+                <span>Mood</span>
+              </button>
+              <button class={styles.hero__filterBtn} data-filter="distance">
+                <span>📏</span>
+                <span>Distance</span>
+              </button>
+            </div>
+            
+            <!-- Search Button -->
+            <button class={styles.hero__searchBtn}>
+              <span>Find Restaurants</span>
+              <span class={styles.hero__searchBtnIcon}>🔍</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class={styles.hero__stats}>
+          <div class={styles.hero__stat}>
+            <span class={styles.hero__statNumber} data-count="10">0</span>
+            <span class={styles.hero__statSuffix}>K+</span>
+            <span class={styles.hero__statLabel}>Restaurants</span>
+          </div>
+          <div class={styles.hero__stat}>
+            <span class={styles.hero__statNumber} data-count="50">0</span>
+            <span class={styles.hero__statSuffix}>K+</span>
+            <span class={styles.hero__statLabel}>Happy Diners</span>
+          </div>
+          <div class={styles.hero__stat}>
+            <span class={styles.hero__statNumber} data-count="100">0</span>
+            <span class={styles.hero__statSuffix}>+</span>
+            <span class={styles.hero__statLabel}>Cities</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Image Section -->
+      <div class={styles.hero__image}>
+        <div class={styles.hero__imageContainer}>
+          <!-- Your actual restaurant image -->
+          <Picture
+            src={HeroImage}
+            width={500}
+            height={400}
+            alt="Beautiful restaurant interior"
+            loading="eager"
+            decoding="async"
+            class={styles.hero__actualImage}
+          />
+          
+          <!-- Liquid Glass Overlay -->
+          <div class={styles.hero__imageOverlay}>
+            <!-- Glass Info Panel -->
+            <div class={styles.hero__glassPanel}>
+              <div class={styles.hero__panelHeader}>
+                <div class={styles.hero__panelTitle}>
+                  <span class={styles.hero__panelIcon}>🏮</span>
+                  <h3>Nearby Restaurants</h3>
+                </div>
+                <div class={styles.hero__panelBadge}>Live</div>
+              </div>
+              
+              <!-- Restaurant List -->
+              <div class={styles.hero__restaurantList}>
+                <div class={styles.hero__restaurantItem} data-item="1">
+                  <div class={styles.hero__itemIcon}>🏮</div>
+                  <div class={styles.hero__itemInfo}>
+                    <span class={styles.hero__itemName}>Dragon's Palace</span>
+                    <span class={styles.hero__itemDetails}>⭐ 4.8 • Asian • 0.3mi</span>
+                  </div>
+                  <div class={styles.hero__itemStatus}>Open</div>
+                </div>
+                
+                <div class={styles.hero__restaurantItem} data-item="2">
+                  <div class={styles.hero__itemIcon}>🍱</div>
+                  <div class={styles.hero__itemInfo}>
+                    <span class={styles.hero__itemName}>Sakura Sushi</span>
+                    <span class={styles.hero__itemDetails}>⭐ 4.9 • Japanese • 0.5mi</span>
+                  </div>
+                  <div class={styles.hero__itemStatus}>Busy</div>
+                </div>
+                
+                <div class={styles.hero__restaurantItem} data-item="3">
+                  <div class={styles.hero__itemIcon}>🥢</div>
+                  <div class={styles.hero__itemInfo}>
+                    <span class={styles.hero__itemName}>Bamboo Garden</span>
+                    <span class={styles.hero__itemDetails}>⭐ 4.7 • Chinese • 0.8mi</span>
+                  </div>
+                  <div class={styles.hero__itemStatus}>Open</div>
+                </div>
+              </div>
+              
+              <!-- Action Button -->
+              <button class={styles.hero__panelBtn}>
+                <span>View All Restaurants</span>
+                <span class={styles.hero__panelBtnIcon}>→</span>
+              </button>
+            </div>
+            
+            <!-- Floating Action Buttons -->
+            <div class={styles.hero__floatingActions}>
+              <button class={styles.hero__actionBtn} data-action="favorite">
+                <span>❤️</span>
+              </button>
+              <button class={styles.hero__actionBtn} data-action="share">
+                <span>📤</span>
+              </button>
+              <button class={styles.hero__actionBtn} data-action="directions">
+                <span>🧭</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{
+  heroClass: styles.hero,
+  blobClass: styles.hero__blob,
+  floatingItemClass: styles.hero__floatingItem,
+  titleLineClass: styles.hero__titleLine,
+  searchBtnClass: styles.hero__searchBtn,
+  filterBtnClass: styles.hero__filterBtn,
+  statClass: styles.hero__stat,
+  restaurantCardClass: styles.hero__restaurantCard
+}}>
+  class HeroController {
+    constructor() {
+      this.hero = document.querySelector(`.${CSS.escape(heroClass)}`);
+      this.hasAnimated = false;
+      this.init();
+    }
+
+    init() {
+      this.setupAnimations();
+      this.setupInteractions();
+      this.setupCounters();
+    }
+
+    setupAnimations() {
+      // Title animation on load
+      setTimeout(() => {
+        const titleLines = document.querySelectorAll(`.${CSS.escape(titleLineClass)}`);
+        titleLines.forEach((line, index) => {
+          setTimeout(() => {
+            line.classList.add('animate');
+          }, index * 200);
+        });
+      }, 300);
+
+      // Floating items random positioning
+      const floatingItems = document.querySelectorAll(`.${CSS.escape(floatingItemClass)}`);
+      floatingItems.forEach((item, index) => {
+        const x = Math.random() * 80 + 10; // 10-90% range
+        const y = Math.random() * 80 + 10;
+        const delay = Math.random() * 2;
+        
+        item.style.left = `${x}%`;
+        item.style.top = `${y}%`;
+        item.style.animationDelay = `${delay}s`;
+      });
+
+      // Blob animations
+      const blobs = document.querySelectorAll(`.${CSS.escape(blobClass)}`);
+      blobs.forEach((blob, index) => {
+        blob.style.animationDelay = `${index * 0.5}s`;
+      });
+    }
+
+    setupInteractions() {
+      // Search button click effect
+      const searchBtn = document.querySelector(`.${CSS.escape(searchBtnClass)}`);
+      if (searchBtn) {
+        searchBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          searchBtn.classList.add('clicked');
+          setTimeout(() => {
+            searchBtn.classList.remove('clicked');
+          }, 300);
+        });
+      }
+
+      // Filter button interactions
+      const filterBtns = document.querySelectorAll(`.${CSS.escape(filterBtnClass)}`);
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+
+      // Restaurant card hover effects
+      const cards = document.querySelectorAll(`.${CSS.escape(restaurantCardClass)}`);
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+    }
+
+    setupCounters() {
+      const statNumbers = document.querySelectorAll('[data-count]');
+      
+      const animateCounter = (element, target) => {
+        const duration = 2000;
+        const steps = 60;
+        const increment = target / steps;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          element.textContent = Math.floor(current);
+        }, duration / steps);
+      };
+      
+      // Trigger counter animation when stats come into view
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !this.hasAnimated) {
+              this.hasAnimated = true;
+              statNumbers.forEach(stat => {
+                const target = parseInt(stat.dataset.count);
+                animateCounter(stat, target);
+              });
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      
+      if (statNumbers.length > 0) {
+        observer.observe(statNumbers[0].closest(`.${CSS.escape(statClass)}`));
+      }
+    }
+  }
+
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new HeroController();
+    });
+  } else {
+    new HeroController();
+  }
+
+  // Handle Astro page transitions
+  document.addEventListener('astro:page-load', () => {
+    new HeroController();
+  });
+</script>
